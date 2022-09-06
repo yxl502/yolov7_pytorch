@@ -1,0 +1,13 @@
+#pytorch=1.10.1
+#torchvision=0.11.2
+#VS2015
+
+conda create -n yolov7 python=3.8
+conda activate yolov7
+conda install pytorch==1.10.1 torchvision==0.11.2 cudatoolkit=10.2
+
+1、准备数据集（labelimg）https://juejin.cn/post/7091171087123218462
+2、修改data\custom.yaml
+3、修改cfg\training\yolov7x_custom.yaml
+4、python train.py --workers 0 --device 0 --batch-size 4  --epochs 500 --nosave --data data/custom.yaml --img 640 640 --cfg cfg/training/yolov7x_custom.yaml --weights 'yolov7x_training.pt' --name yolov7-custom --hyp data/hyp.scratch.custom.yaml
+5、python detect.py --weights runs/train/yolov7-custom/weights/last.pt --conf 0.25  --view-img --img-size 640 --source 00000.bmp
